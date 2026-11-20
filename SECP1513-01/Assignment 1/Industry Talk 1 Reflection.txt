@@ -1,0 +1,5 @@
+Industry Talk 1 Reflection:
+The Clarity Techworks industry talk provided valuable insights into career paths in fintech, covering four key roles: Developer, UI/UX Designer, QA Testing Analyst, and Web/API Developer. 
+The speakers explained each role's responsibilities and tools, like VS Code, Jira, and Firebase Console, helping clarify the skills needed for success. 
+They emphasized the importance of embracing failure, staying adaptable, and continuously learning through platforms like GitHub and online certifications. 
+Overall, the talk expanded our understanding of career opportunities in tech and inspired me to enhance my skills and resilience.
