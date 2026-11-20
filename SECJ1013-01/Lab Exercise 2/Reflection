@@ -1,0 +1,5 @@
+In this programming lab, I learned how to apply several fundamental programming concepts and control structures to build interactive C++ programs. 
+Using the `switch` statement, I was able to map input (such as a day number) to specific outcomes, handling invalid inputs gracefully by displaying appropriate messages. 
+The `if...else` statements helped with conditional decisions based on the customer type, allowing for customized behavior like applying discounts based on certain conditions. 
+Additionally, I practiced implementing loops (such as `for`, `while`, and `do...while`) to repeat actions efficiently, whether it was printing numbers, prompting for a password, or confirming user continuation. 
+Overall, the exercise improved my ability to combine control structures and logic to create user-friendly and functional programs.

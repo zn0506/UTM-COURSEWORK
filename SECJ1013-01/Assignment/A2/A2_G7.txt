@@ -1,0 +1,140 @@
+//NAME: WONG ZI NING          MATRIC NUMBER:A24CS0313     DATE:2 JAN 2025
+//NAME: ELEANOR TING PIK EN   MATRIC NUMBER:A24CS0247
+//Assignment 2
+
+//Question 1
+#include <iostream>
+using namespace std;
+
+void calc(int T, int F);
+
+int main()
+{
+    int F, T;
+    do {
+        cout << "Enter temperature in Celsius (-999 to stop): ";
+        cin >> T;
+
+        if (T != -999) {
+            F = (9.0 /5 * T) + 32;
+            calc(T, F);
+        }
+        else {
+            cout << "Program Terminated." << endl;
+        }
+    } while (T != -999);
+
+    return 0;
+}
+
+void calc(int T, int F)
+{
+    cout <<"Temperature in Fahrenheit: " << F << "°F "<<endl;
+    
+    if (F < 50) {
+        cout << "Category: Cold\n" << endl;
+    }
+    else if (F >= 50 && F <= 77) {
+        cout << "Category: Moderate\n" << endl;
+    }
+    else if (F > 77) {
+        cout << "Category: Hot\n" << endl;
+    }
+    else {
+        cout << "Invalid Number\n" << endl;
+    }
+}
+
+//Question 2
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+const int MAX_STUDENTS = 10;
+const int MAX_BOOKS = 3;
+
+// Function to display books borrowed by student
+void displayBooksBorrowedByStudent(string books[][MAX_BOOKS], int studentID, int numBooks[], int numStudents) {
+    if (studentID < 1 || studentID > numStudents) {
+        cout << "Invalid Student ID!" << endl;
+        return;
+    }
+
+    cout << "Books borrowed by Student " << studentID << ":\n";
+    for (int i = 0; i < numBooks[studentID - 1]; i++) {
+        cout << "- " << books[studentID - 1][i] << endl;
+    }
+}
+
+// Function to calculate borrowing statistics
+void calculateBorrowingStats(int numBooks[], int numStudents, int &totalBooks, int &mostBooksStudent) {
+    totalBooks = 0;
+    mostBooksStudent = 0;
+    int maxBooks = 0;
+
+    for (int i = 0; i < numStudents; i++) {
+        totalBooks += numBooks[i];
+        if (numBooks[i] > maxBooks) {
+            maxBooks = numBooks[i];
+            mostBooksStudent = i + 1;
+        }
+    }
+}
+
+int main() {
+    int numStudents;
+    string books[MAX_STUDENTS][MAX_BOOKS];
+    int numBooks[MAX_STUDENTS] = {0};
+
+    // Input number of students
+    cout << "Enter the number of students (max 10): ";
+    cin >> numStudents;
+    while (numStudents < 1 || numStudents > MAX_STUDENTS) {
+        cout << "Invalid number! Please enter between 1 and 10: ";
+        cin >> numStudents;
+    }
+
+    // Input book data for each student
+    for (int i = 0; i < numStudents; i++) {
+        cout << "Enter the number of books borrowed by Student " << i + 1 << " (max 3): ";
+        cin >> numBooks[i];
+        while (numBooks[i] < 0 || numBooks[i] > MAX_BOOKS) {
+            cout << "Invalid number! Enter between 0 and 3: ";
+            cin >> numBooks[i];
+        }
+
+        cin.ignore(); // Clear buffer
+        for (int j = 0; j < numBooks[i]; j++) {
+            cout << "Enter the title of book " << j + 1 << ": ";
+            getline(cin, books[i][j]);
+        }
+    }
+
+    // Display borrowing records
+    cout << "\nBorrowing Records:\n";
+    cout << left << setw(10) << "Student" << "Books" << endl;
+  
+    for (int i = 0; i < numStudents; i++) {
+        cout << left << setw(10) << i + 1;
+        for (int j = 0; j < numBooks[i]; j++) {
+            cout << books[i][j];
+            if (j < numBooks[i] - 1) cout << ", ";
+        }
+        cout << endl;
+    }
+
+//ID of student
+    int studentID;
+    cout << "\nEnter a student ID to view their borrowed books: ";
+    cin >> studentID;
+    displayBooksBorrowedByStudent(books, studentID, numBooks, numStudents);
+
+    // Calculate and display statistics
+    int totalBooks, mostBooksStudent;
+    calculateBorrowingStats(numBooks, numStudents, totalBooks, mostBooksStudent);
+    cout << "\nTotal books borrowed by all students: " << totalBooks << endl;
+    cout << "Student who borrowed the most books: Student " << mostBooksStudent << endl;
+
+    return 0;
+}

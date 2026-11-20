@@ -1,0 +1,131 @@
+//LAB EXERCISE 4
+//FINAL TEST QUESTION 2
+
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <iomanip>
+#define NUMOFBRAND 10
+#define NUMOFYEAR 4
+using namespace std;
+
+//TASK 1: 4 MARKS
+struct Sales
+{
+	string brand;
+	double percentage[NUMOFYEAR];
+	double average;
+};
+
+//Task 2: 7.5 marks
+//Calculate the average of each brand (10) for 4 years
+void calculateAverage (Sales S[])
+{
+	//outer loop for brand
+	for (int i = 0; i < NUMOFBRAND; i++)
+	{
+		double sum = 0;
+		//inner loop for 4 years
+		for(int j = 0; j < NUMOFYEAR ; j++)
+		{
+			sum += S[i].percentage[j];
+		}
+		S[i].average = sum / NUMOFYEAR;
+	}
+}
+
+//Task 3: 9 marks
+int findLowest(Sales S[])
+{
+	double lowestPercentage = S[0].average;
+	int lowestBrand = 0;
+	
+	for (int i = 0 ;i < NUMOFBRAND; i++)
+	if (S[i].average < lowestPercentage)
+	{
+		lowestPercentage = S[i].average;
+		lowestBrand = i;
+	}
+	return lowestBrand;
+}
+
+//Task 4: 9 marks
+int findHighest(Sales S[])
+{
+	double highestPercentage = S[0].average;
+	int highestBrand;
+	
+	for(int i = 0; i < NUMOFBRAND ; i++)
+	if (S[i].average > highestPercentage)
+	{
+		highestPercentage = S[i].average;
+		highestBrand = i;
+	}
+	return highestBrand;
+}
+
+void displayLine() 
+{
+	for (int i = 0; i < 60; i++) 
+	{
+		cout << "-";
+	}
+		cout << endl;
+		
+}
+
+//Task 5: 19 marks
+void displayOutput(Sales S[])
+{
+	cout << "Percentage of Sales by Brand (2016 to 2019)" << endl;
+	
+	displayLine();
+	cout << " BRAND" << setw(16) << "2016" << setw(8) << "2017" << setw(8) << "2018" << setw(8) << "2019"  << setw(11) << "AVERAGE" << endl;
+	displayLine();
+	
+	for (int i = 0; i < NUMOFBRAND; i++)
+	{
+		cout << left << setw(18) << S[i].brand;
+		for (int j = 0; j < NUMOFYEAR; j++)
+		  {cout << setw(8) << fixed << setprecision(2) << S[i].percentage[j];
+		  }
+		cout << setw (14) << fixed << setprecision(2) << S[i].average << endl;
+	}
+	
+	displayLine();
+	int low = findLowest(S);
+	int high = findHighest(S);
+	
+	cout << "Lowest Average of Sales Percentage: "<< fixed << setprecision(2) << S[low].average << " - " << S[low].brand << endl;
+	cout << "Highest Average of Sales Percentage: "<< fixed << setprecision(2) << S[high].average << " - " << S[high].brand<< endl;
+	displayLine();
+}
+
+//Task 6: 16.5 marks
+int main()
+{
+	Sales Car[NUMOFBRAND];
+	ifstream inp("InputQ2.txt");
+	if (!inp)
+	{
+		cout << "ERROR: Cannot open file.\n";
+		return 0;
+	}
+	
+	for(int i = 0; i < NUMOFBRAND; i++)
+	{
+		for(int j = 0; j < NUMOFYEAR; j++)
+		{
+			inp >> Car[i].percentage[j];
+		}
+		getline(inp, Car[i].brand);
+	}
+	inp.close();
+	
+	calculateAverage(Car);
+	
+	displayOutput(Car);
+	
+	return 0;
+
+}

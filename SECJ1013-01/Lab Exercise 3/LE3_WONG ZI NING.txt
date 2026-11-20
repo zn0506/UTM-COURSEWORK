@@ -1,0 +1,175 @@
+//Question 1
+#include <iostream>
+using namespace std;
+
+bool isPassing(int score)
+{
+	return score >= 50;
+}
+
+int main()
+{
+	int score;
+	
+	cout << "Enter the student's test score: ";
+	cin >> score;
+	
+	if(isPassing(score))
+	{
+		cout << "The student passed the test. "<< endl;
+	}
+	else
+	{
+		cout << " The student failed the test. " << endl;
+	}
+	
+	return 0;
+}
+
+
+
+//Question 2
+#include <iostream>
+#include<iomanip>
+using namespace std;
+
+int main()
+{
+	double itemPrice[5];
+	double totalPrice = 0, highestPrice = 0;
+	double avgPrice;
+	
+	cout << "Enter the prices of 5 items: "<< endl;
+	for(int i = 0; i < 5; i++)
+	{
+		cin >> itemPrice[i];
+	}
+	
+	for(int i = 0; i < 5; i++)
+	{
+		totalPrice += itemPrice[i];
+		if(itemPrice[i] > highestPrice)
+		{
+			highestPrice = itemPrice[i];
+		}
+	}
+	
+	avgPrice = totalPrice / 5;
+	
+	cout << fixed << setprecision(2);
+	cout << "Total price: RM" << totalPrice << endl;
+	cout << "Average price: RM" << avgPrice << endl;
+	cout << fixed << setprecision(1) <<"Highest price: RM" << highestPrice << endl;
+	
+	return 0;
+}
+
+
+
+//Question 3
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+	int marks[2][3];
+	int total[2];
+	
+	cout << "Enter marks for 2 students (3 subjects each) : " << endl;
+	
+	for(int i = 0; i<2; i++)
+	{
+		cout << "Student " << (i+1) << ": " << endl;
+		for(int j = 0; j<3; j++)
+		{
+			cin >> marks[i][j];
+		}
+	}
+	
+	cout << "\n\nMarks Table:"<< endl;
+	cout << "Student Math English Science Total"<< endl;
+	for(int i = 0; i < 2; i++)
+	{
+		total[i] = 0;
+		cout << (i+1)<< "\t";
+		for (int j = 0; j < 3; j++)
+		{
+			cout << marks[i][j] << "\t";
+			total[i] += marks[i][j];
+		}
+		
+		cout << total[i] << endl;
+	}
+	
+	return 0;
+}
+
+
+
+//Question 4
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+//Function to calculate total sales
+double totalSales(double sales[][3], int product)
+{
+	double total = 0;
+	for(int i = 0; i < 3; i++)
+	{
+		total += sales[product][i];
+	}
+	return total;
+}
+
+//Function to find the maximum region
+void findMaxRegion(double sales[][3], int product, double &highestSales, int &maxRegion)
+{
+	highestSales = sales[product][0];
+	maxRegion = 1; // Region 1 is initially assumed to be the max
+	for(int i = 0; i < 3; i++)
+	{
+		if(sales[product][i] > highestSales)
+	{
+		highestSales = sales[product][i];
+		maxRegion = i + 1;
+	}
+	}
+	
+}
+
+int main()
+{
+	double sales[2][3];
+	int maxRegion;
+	double highestSales;
+	
+	cout << "Enter sales data for 2 products across 3 regions: ";
+	
+	//Input sales data
+	for(int i = 0; i < 2; i++)
+	{
+		cout << "\nProduct " << (i+1) << ": " << endl;
+		for(int j = 0; j < 3; j++)
+		{
+			cout << "Region " << (j+1) << ": ";
+			cin >> sales[i][j];
+		}
+	}
+	
+	//Cal and Display result
+	for(int product = 0; product < 2; product++)
+	{
+		double total = totalSales(sales, product);
+		double highestSales;
+		int maxRegion;
+		findMaxRegion(sales, product, highestSales, maxRegion);
+		
+		cout << "\nProduct " << product+1 << ": " << endl;
+		cout << "Total sales: RM" << total << endl;
+		cout << "Region with highest sales: Region " << maxRegion << " (Sales: RM" << highestSales <<")"<<endl;
+	}
+	
+	return 0;	
+}

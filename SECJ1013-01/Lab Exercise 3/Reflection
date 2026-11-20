@@ -1,0 +1,6 @@
+In this programming exercise, I got hands-on experience using functions to modularize the code and improve readability. 
+In Question 1, I created a function isPassing to evaluate the students test score, making the code cleaner and easier to understand. 
+For other exercises, I worked with arrays and matrices to process and manipulate data, which helped solidify my understanding of data structures. 
+Functions like totalSales and findMaxRegion in Question 4 allowed me to interact with arrays efficiently and pass data by reference to modify values outside the function. 
+The exercises also enhanced my ability to calculate totals, averages, and maximum values, and present the results in a user-friendly format. 
+Overall, these tasks strengthened my skills in handling user inputs, performing calculations, and organizing code logically using functions and arrays.

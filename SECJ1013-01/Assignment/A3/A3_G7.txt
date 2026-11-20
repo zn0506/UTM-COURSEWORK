@@ -1,0 +1,153 @@
+//NAME: WONG ZI NING          MATRIC NUMBER:A24CS0313     DATE:1 JAN 2025
+//NAME: ELEANOR TING PIK EN   MATRIC NUMBER:A24CS0247
+
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+using namespace std;
+
+//Function Prototypes
+void getInput(const char filename[], char universities[][50], int intake[], int enrolment[], int output[], int &size);
+int calTotal(const int arr[], int size);
+double calAverage(const int arr[], int size);
+int getLowest(const int arr[], int size);
+int getHighest(const int arr[], int size);
+void writeOutput(const char filename[], const char universities[][50], const int intake[], const int enrolment[], const int output[], int size);
+
+//Task 1
+void getInput(const char filename[], char universities[][50], int intake[], int enrolment[], int output[], int &size) 
+{
+    ifstream inFile(filename);
+    if (!inFile.is_open()) {
+        cout << "Input file could not be opened! Terminating!\n";
+        exit(1);
+    }
+
+    while (inFile >> universities[size] >> intake[size] >> enrolment[size] >> output[size]) {
+        size++;
+    }
+    inFile.close();
+}
+
+//Task 2
+int calTotal(const int arr[], int size) 
+{
+    int sum = 0;
+    for (int i = 0; i < size; ++i) {
+        sum += arr[i];
+    }
+    return sum;
+}
+
+double calAverage(const int arr[], int size) 
+{
+    return static_cast<double>(calTotal(arr, size)) / size;
+}
+
+//Task 3
+int getLowest(const int arr[], int size) 
+{
+    int minIndex = 0;
+    for (int i = 1; i < size; ++i) {
+        if (arr[i] < arr[minIndex]) {
+            minIndex = i;
+        }
+    }
+    return minIndex;
+}
+//Task 4
+int getHighest(const int arr[], int size) 
+{
+    int maxIndex = 0;
+    for (int i = 1; i < size; ++i) {
+        if (arr[i] > arr[maxIndex]) {
+            maxIndex = i;
+        }
+    }
+    return maxIndex;
+}
+
+//Task 7
+void writeOutput(const char filename[], const char universities[][50], const int intake[], const int enrolment[], const int output[], int size) 
+{
+    ofstream outFile(filename);
+    if (!outFile) {
+        cerr << "Error: Unable to open output file." << endl;
+        exit(1);
+    }
+
+    outFile << "    NUMBER OF STUDENTS' INTAKE, ENROLMENT AND OUTPUT" << endl;
+    outFile << "    IN PUBLIC UNIVERSITIES (2024)" << endl;
+    outFile << "----------------------------------------------------------------------" << endl;
+    outFile << left << setw(30) << "University" << setw(15) << "Intake" << setw(15) << "Enrolment" << "Output" << endl;
+    outFile << "----------------------------------------------------------------------" << endl;
+
+    for (int i = 0; i < size; ++i) {
+        outFile << left << setw(30) << universities[i] << setw(15) << intake[i] << setw(15) << enrolment[i] << output[i] << endl;
+    }
+    
+    outFile.close();
+}
+
+
+int main()
+{
+	const int SIZE = 50;
+	char universities[SIZE][50];
+	int intake[SIZE], enrolment[SIZE], output[SIZE];
+	int size = 0;
+	const char inputFile[] = "input.txt";
+	const char outputFile[] = "output.txt";
+	
+	getInput(inputFile, universities, intake, enrolment, output, size);
+	
+	int totalIntake = calTotal(intake, size);
+	int totalEnrolment = calTotal(enrolment, size);
+	int totalOutput = calTotal(output, size);
+	
+	int lowestIntake = getLowest(intake, size);
+	int lowestEnrolment = getLowest(enrolment, size);
+	int lowestOutput = getLowest(output, size);
+	
+	int highestIntake = getHighest(intake, size);
+	int highestEnrolment = getHighest(enrolment, size);
+	int highestOutput = getHighest(output, size);
+	
+	double avgIntake = calAverage(intake, size);
+	double avgEnrolment = calAverage(enrolment, size);
+	double avgOutput = calAverage(output, size);
+	
+	int rangeIntake = intake[highestIntake] - intake[lowestIntake];
+    int rangeEnrolment = enrolment[highestEnrolment] - enrolment[lowestEnrolment];
+	int rangeOutput = output[highestOutput] - output[lowestOutput];
+
+	writeOutput(outputFile, universities, intake, enrolment, output, size);
+	
+	//Append totals, averages, and other calculations to the file
+	ofstream outFile(outputFile, ios::app);
+	if(outFile)
+	{
+		outFile << "----------------------------------------------------------------------"<< endl;
+		outFile << left << setw(30) << "TOTAL       " << setw(15) << totalIntake << setw(15) << totalEnrolment << setw(15) << totalOutput << endl;
+		outFile << left << setw(30) << "AVERAGE     " << setw(15) << fixed << setprecision(2) << avgIntake << setw(15) << avgEnrolment << setw(15) << avgOutput << endl;
+		outFile << "----------------------------------------------------------------------"<< endl;
+		outFile << "THE LOWEST NUMBER OF STUDENTS' INTAKE = " << intake[lowestIntake] << " (" << universities[lowestIntake]<< ")" << endl;
+		outFile << "THE HIGHEST NUMBER OF STUDENTS' INTAKE = " << intake[highestIntake] << " (" << universities[highestIntake] << ")" << endl;
+        outFile << "\nTHE LOWEST NUMBER OF STUDENTS' ENROLMENT = " << enrolment[lowestEnrolment] << " (" << universities[lowestEnrolment] << ")" << endl;
+        outFile << "THE HIGHEST NUMBER OF STUDENTS' ENROLMENT = " << enrolment[highestEnrolment] << " (" << universities[highestEnrolment] << ")" << endl;
+        outFile << "\nTHE LOWEST NUMBER OF STUDENTS' OUTPUT = " << output[lowestOutput] << " (" << universities[lowestOutput] << ")" << endl;
+		outFile << "THE HIGHEST NUMBER OF STUDENTS' OUTPUT = " << output[highestOutput] << " (" << universities[highestOutput] << ")" << endl;
+        outFile << "\nRange of Intake: " << rangeIntake << endl;
+        outFile << "Range of Enrolment: " << rangeEnrolment << endl;
+        outFile << "Range of Output: " << rangeOutput << endl;
+        outFile << "----------------------------------------------------------------------"<< endl;
+        outFile.close();
+	}
+	else
+	{
+		cerr << "Error: Could not append to output file." << endl;
+	}
+	
+	return 0;
+	
+}

@@ -1,0 +1,4 @@
+In this programming technique lab exercise, I gained hands-on experience using the division (/) and modulus (%) operators alongside pre-test and post-test loops. 
+The division operator helped in determining how many times one value fits into another, while the modulus operator was valuable in calculating remainders during division. 
+I used the pre-test loop (such as while) to repeatedly execute a set of instructions as long as a condition was true, and the post-test loop (like do-while) to ensure that the loop ran at least once before the condition was checked. 
+This exercise enhanced my understanding of controlling loop flow and handling various mathematical operations efficiently in programming.

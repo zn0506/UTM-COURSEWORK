@@ -1,0 +1,252 @@
+//Question 1
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int age;
+	cout << "Enter age: ";
+	cin >> age;
+	
+	if(age>=0 && age<=12){
+		cout << "Category: Child" << endl;
+	}
+	else if(age>=13 && age<=17){
+		cout << "Category: Teenager" << endl;
+	}
+	else if(age>=18 && age <=64){
+		cout << "Category: Adult" << endl;
+	}
+	else if(age>=65){
+		cout << "Category: Senior" << endl;
+	}
+	else{
+		cout << "Invalid number." << endl;
+	}
+	
+	return 0;
+}
+
+//Question 2
+#include <iostream>
+using namespace std;
+
+int main()	
+{
+	int day_number;
+	cout << "Enter day number(from 1-7): ";
+	cin >> day_number;
+	
+	switch(day_number){
+		case 1:
+			cout << "Sunday" << endl;
+			break;
+			
+		case 2:
+			cout << "Monday" << endl;
+			break;
+			
+		case 3:
+			cout << "Tuesday" << endl;
+			break;
+			
+		case 4:
+			cout << "Wednesday" << endl;
+			break;
+			
+		case 5:
+			cout << "Thursday" << endl;
+			break;
+			
+		case 6:
+			cout << "Friday" << endl;
+			break;
+			
+		case 7:
+			cout << "Saturday" << endl;
+			break;
+			
+		default:
+			cout << "Invalid input." << endl;
+			break;			
+	}
+	return 0;
+	
+}
+
+//Question 3
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	string customerType;
+	double purchaseAmount, discount = 0;
+	
+	cout << "Enter Type of Member (Gold or Regular): ";
+	cin >> customerType;
+	cout << "Enter Total Purchase Amount: RM";
+	cin >> purchaseAmount;
+	
+	if(customerType == "Gold"|| customerType == "gold"){
+		if(purchaseAmount>=1000){
+			discount=50;
+		}
+		else if(purchaseAmount>=500 && purchaseAmount<=99){
+			discount=40;
+		}
+		else if(purchaseAmount>=200 && purchaseAmount<=499){
+			discount=25;
+		}
+		else if(purchaseAmount>=0 && purchaseAmount<200){
+			discount=10;
+		}
+		else{
+			cout << "Invalid purchase amount." << endl;
+		return 0;
+		}
+		
+	}
+	else if(customerType == "Regular"|| customerType == "regular"){
+		if(purchaseAmount>=1000){
+			discount=40;
+		}
+		else if(purchaseAmount>=500 && purchaseAmount<=999){
+			discount=30;
+		}
+		else if(purchaseAmount>=200 && purchaseAmount<=499){
+			discount=15;
+		}
+		else if(purchaseAmount>=0 && purchaseAmount<200){
+			discount=5;
+		}
+		else{
+			cout << "Invalid purchase amount." << endl;
+			return 0;
+		}	
+	}
+	else{
+		cout<<"Invalid customer type."<<endl;
+	}
+
+	double discountAmount = (purchaseAmount * discount) / 100; 
+	double finalPrice = purchaseAmount-discountAmount;
+	
+	cout << "Discount: " << discount << "%" << endl;
+	cout << "Final amount is: RM" << finalPrice <<endl;
+	
+	return 0;	
+}
+
+//Question 4
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n;
+	cout << "Enter an integer: ";
+	cin >> n;
+	
+	for(int i=1; i<=n ;i++ )
+	{
+		cout << i << " ";
+	
+	}
+}
+
+//Question 5
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int password;
+	cout <<"Enter password: ";
+	cin >> password;
+	
+	while(password!=1234)
+	{
+		cout << "Invalid password.\nPlease insert again: ";
+		cin >>password;
+		
+	}
+	
+	cout << "Access granted." << endl;
+	
+	return 0;
+}
+
+//Question 6
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	char choice;
+	
+	do{
+		cout << "Do you want to continue(y/n):";
+		cin >> choice;
+	}while(choice!='n');
+	
+	cout << "Program terminated."<<endl;
+	
+	return 0;
+}
+
+//Question 7
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int point;
+	char choice;
+	
+	cout << "Enter your current loyalty points: ";
+	cin >> point;
+	
+	do{
+		if(point<100)
+		{
+			cout << "Insufficient points to redeem. You need at least 100 points."<<endl;
+			break;
+		}
+		
+	int discount=0;
+	if (point>=1000){
+		discount=15;
+		point-=1000;
+	}
+	else if (point>=500 && point<=999){
+		discount=10;
+		point-=500;
+	}
+	else if (point>=100 && point<=499){
+		discount=5;
+		point-=100;
+	}
+	
+	cout << "Discount: " << discount << "%" << endl;
+	cout << "Remaining points: " << point << endl;
+	
+	if(point<100){
+		cout << "Insufficient points to continue redeeming."<<endl;
+		break;
+	}
+	
+	cout << "Do you want to redeem more points? (y/n): ";
+	cin >> choice;
+	
+	while (choice != 'y' && choice != 'n'){
+		cout << "Invalid input. Please enter 'y' to continue or 'n' to stop: ";
+		cin >> choice;
+	}
+	
+	}while(choice!='n');
+	
+	cout << "Thank you for using the loyalty points redemption program." << endl;
+	
+	return 0;
+}
